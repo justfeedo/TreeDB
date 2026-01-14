@@ -1,0 +1,12 @@
+# System files
+Thumbs.db
+Desktop.ini
+popis.txt
+
+# IDE files
+.vscode/
+.idea/
+
+# MySQL dumps or logs (if any created locally)
+*.log
+*.err
