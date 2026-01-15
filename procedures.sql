@@ -138,12 +138,17 @@ BEGIN
     DECLARE v_old_version INT;
     DECLARE v_new_id INT;
     DECLARE v_parent_has_children INT;
+    DECLARE v_is_active BOOLEAN;
     
-    SELECT tree_id, parent_id, version INTO v_tree_id, v_parent_id, v_old_version 
+    SELECT tree_id, parent_id, version, is_active INTO v_tree_id, v_parent_id, v_old_version, v_is_active 
     FROM nodes WHERE id = p_node_id;
     
     IF v_tree_id IS NULL THEN
          SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Node not found';
+    END IF;
+
+    IF v_is_active = FALSE THEN
+         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Cannot create version from invalid node';
     END IF;
     
     -- Invalidate old

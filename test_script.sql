@@ -43,5 +43,9 @@ CALL sp_get_subordinate_elements(@root_id);
 -- 9. Remove a node (Dev Manager)
 CALL sp_remove_node(@dev_mgr_id);
 
+-- 10. Test Invalid Versioning (Try to version the OLD CFO again)
+-- This should fail because @cfo_id was invalidated in step 7.
+-- CALL sp_create_node_version(@cfo_id, '{"name": "Should Fail"}', @fail_id);
+
 -- Check counts
 SELECT * FROM trees WHERE id = @tree_id;
